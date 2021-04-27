@@ -3,6 +3,11 @@ namespace App\Http;
 
 use App\Http\Request;
 
+    /*
+       Used to find out the parameters to direct the traffic.
+       Passed the data to the Director class for directing to the right controller.
+    */
+
 class Router {
     public $uri;
     public $method;

@@ -20,6 +20,8 @@ class Director
 
         $this->parameters = $router->parameters;
         $this->findParameters();
+
+        $this->direct();
     }
 
     public function findController()
@@ -49,6 +51,13 @@ class Director
         } else {
             $this->parameters = $this->parameters;
         }
+    }
+
+    public function direct() {
+        $ctrl = 'App\\Controllers\\' . $this->controller;
+        $ctrl = new $ctrl;
+        call_user_func(array($ctrl, $this->action), $this->parameters);
+
     }
 
 }

@@ -4,11 +4,11 @@ namespace App\Controllers;
 class TestController {
 
     public function index() {
-        return "Indexing data";
+        echo "Indexing data";
     }
 
-    public function test() {
-        return "Test method";
+    public function test($number) {
+        echo $number;
     }
 
 }

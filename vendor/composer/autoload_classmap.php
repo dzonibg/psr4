@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Helpers\\Greeter' => $baseDir . '/App/Helpers/hello.php',
+    'App\\Http\\Request' => $baseDir . '/App/Http/Request.php',
+    'App\\Http\\Router' => $baseDir . '/App/Http/Router.php',
 );

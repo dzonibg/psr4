@@ -22,6 +22,8 @@ class ComposerStaticInit71a86c1f3aa48965a28cb5f49153e8e3
 
     public static $classMap = array (
         'App\\Helpers\\Greeter' => __DIR__ . '/../..' . '/App/Helpers/hello.php',
+        'App\\Http\\Request' => __DIR__ . '/../..' . '/App/Http/Request.php',
+        'App\\Http\\Router' => __DIR__ . '/../..' . '/App/Http/Router.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -7,4 +7,8 @@ class TestController {
         return "Indexing data";
     }
 
+    public function test() {
+        return "Test method";
+    }
+
 }

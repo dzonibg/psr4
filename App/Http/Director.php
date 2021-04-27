@@ -1,13 +1,16 @@
 <?php
 namespace App\Http;
 
-class Director {
+
+class Director
+{
 
     public $controller;
     public $action;
     public $parameters;
 
-    public function __construct() {
+    public function __construct()
+    {
         $router = new Router();
         $this->controller = $router->controller;
         $this->findController(); //TODO
@@ -16,18 +19,36 @@ class Director {
         $this->findAction();
 
         $this->parameters = $router->parameters;
+        $this->findParameters();
     }
 
-    public function findController() {
-        $this->controller = ucfirst($this->controller) . "Controller";
+    public function findController()
+    {
+        $this->controller = ucfirst($this->controller) . "Controller"; //TODO check if controller exists.
     }
 
     public function findAction()
     {
-        if (method_exists($this->controller, $this->action)) {
+        $exists = 0;
+        if (method_exists('App\\Controllers\\' . $this->controller, $this->action)) {
             $this->action = $this->action;
-            } else {
-            $this->action = "index"; //TODO check if index exists, else throw error
-            }
+            $exists = 1;
         }
+
+        if (($this->action == '') && (method_exists('App\\Controllers\\' . $this->controller,
+                'index'))) {
+            $this->action = "index";
+        } else if (!method_exists('App\\Controllers\\' . $this->controller, $this->action)) {
+            $this->action = "show";
+        }
+    }
+
+    public function findParameters() {
+        if (!isset($this->parameters)) {
+            return 0;
+        } else {
+            $this->parameters = $this->parameters;
+        }
+    }
+
 }

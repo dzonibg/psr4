@@ -44,4 +44,8 @@ class Model
     public function insert($values) {
         $this->db()->query("INSERT INTO " . $this->tableName . " VALUES (" . $values . ");");
     }
+
+    public function findById($id) {
+        return $this->db()->query("SELECT * FROM " . $this->tableName . " WHERE id=" . $id)->fetch();
+    }
 }

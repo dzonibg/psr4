@@ -16,4 +16,10 @@ class UserController {
         $user->insert("NULL, 'TestName', 'testmail'");
         echo "insert";
     }
+
+    public function show($id) {
+        $user = new Users();
+        $data = $user->findById($id);
+        return view("view_user", compact('data'));
+    }
 }

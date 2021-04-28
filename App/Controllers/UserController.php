@@ -7,7 +7,8 @@ class UserController {
 
     public function index() {
         $users = new Users();
-        var_dump($users->fetchAll());
+        $data = $users->fetchAll();
+        return view("users", compact('data'));
     }
 
     public function insert() {

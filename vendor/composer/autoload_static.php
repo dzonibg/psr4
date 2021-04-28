@@ -21,11 +21,17 @@ class ComposerStaticInit71a86c1f3aa48965a28cb5f49153e8e3
     );
 
     public static $classMap = array (
-        'App\\Controllers\\Director' => __DIR__ . '/../..' . '/App/Http/Director.php',
+        'App\\Controllers\\ErrorHandler' => __DIR__ . '/../..' . '/App/Controllers/ErrorHandler.php',
+        'App\\Controllers\\IndexController' => __DIR__ . '/../..' . '/App/Controllers/IndexController.php',
         'App\\Controllers\\TestController' => __DIR__ . '/../..' . '/App/Controllers/TestController.php',
+        'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/App/Controllers/UserController.php',
         'App\\Helpers\\Greeter' => __DIR__ . '/../..' . '/App/Helpers/hello.php',
+        'App\\Http\\Director' => __DIR__ . '/../..' . '/App/Http/Director.php',
+        'App\\Http\\Dispatcher' => __DIR__ . '/../..' . '/App/Http/Dispatcher.php',
         'App\\Http\\Request' => __DIR__ . '/../..' . '/App/Http/Request.php',
         'App\\Http\\Router' => __DIR__ . '/../..' . '/App/Http/Router.php',
+        'App\\Models\\Model' => __DIR__ . '/../..' . '/App/Models/DBQuery.php',
+        'App\\Models\\Users' => __DIR__ . '/../..' . '/App/Models/Users.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

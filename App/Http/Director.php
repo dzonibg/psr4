@@ -8,52 +8,67 @@ class Director
     public $controller;
     public $action;
     public $parameters;
+    public $errors = false;
+    public $router;
 
     public function __construct()
     {
-        $router = new Router();
-        $this->controller = $router->controller;
-        $this->findController(); //TODO
+        $this->router = new Router();
 
-        $this->parameters = $router->parameters;
-        $this->findParameters();
+        $this->controller = $this->router->controller;
+        $this->findController();
 
-        $this->action = $router->action;
+        $this->parameters = $this->router->parameters;
+
         $this->findAction();
+
+
 
         return $this->direct();
     }
 
     public function findController()
     {
+        if ($this->controller == "") {
+            $this->controller = "Index";
+        }
         $this->controller = ucfirst($this->controller) . "Controller"; //TODO check if controller exists.
+        if
+            ((!class_exists('App\\Controllers\\' . $this->controller)) &&
+            ($this->controller != "IndexController")) {
+
+            $this->errors = true;
+            $this->controller = "ErrorHandler";
+            $this->action = "classNotFound";
+        }
     }
 
     public function findParameters() {
-        if (!isset($this->parameters)) {
-            return 0;
-        } else {
-            $this->parameters = $this->parameters;
-        }
+
     }
 
     public function findAction()
     {
-        $exists = 0;
-        if (method_exists('App\\Controllers\\' . $this->controller, $this->action)) {
-            $this->action = $this->action;
-            $exists = 1;
-        }
+        $this->action = $this->router->action;
 
-        if (($this->action == '') && (method_exists('App\\Controllers\\' . $this->controller,
-                'index'))) {
-            $this->action = "index";
-        } else if (!method_exists('App\\Controllers\\' . $this->controller, $this->action) &&
-            ($this->parameters != '')) {
-            $this->parameters = $this->action;
-            $this->action = "show";
-        } else if (($this->parameters == '') && ($this->action == "show")) {
-            $this->action = "methodNotFound";
+        if ($this->errors == false) {
+            $setAction = $this->action;
+            if ((method_exists('App\\Controllers\\' . $this->controller, $this->action)) &&
+                ($this->action == "")) {
+                $this->action = $this->action;
+            }
+            if ((is_numeric($setAction)) && (method_exists('App\\Controllers\\' . $this->controller, "show"))) {
+                $this->action = "show";
+                $this->parameters = $setAction;
+            } else if (method_exists('App\\Controllers\\' . $this->controller, "index")
+                && ($setAction == "")) {
+                $this->action = "Index";
+            }
+
+            if (!method_exists('App\\Controllers\\' . $this->controller, $this->action)) {
+                $this->action = "methodNotFound";
+                $this->controller = "ErrorHandler";
+            }
         }
     }
 

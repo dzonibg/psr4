@@ -7,8 +7,8 @@ class TestController {
         echo "Indexing data";
     }
 
-    public function edit($number) {
-        echo $number;
+    public function show() {
+        echo "Hit show";
     }
 
 }
